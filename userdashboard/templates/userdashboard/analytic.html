@@ -1,0 +1,69 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">List of Your Topic</div>
+                <br>
+                <a href="http://iotapps.belajardisini.com/analytic/work" class="btn btn-success btn-sm btn-round"><i class="success"></i> Your Data Analytics Process !</a>
+                <div class="card-body table-responsive">
+                                        <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                                                <tr>
+                            <td>1</td>
+                            <td>heartRateReadings</td>
+                            <td>Readings for heart rate</td>
+                            <td>
+                                <a href="http://iotapps.belajardisini.com/topic/heartratereadings/explorer" class="btn btn-success btn-sm btn-round"><i class="success"></i> Explorer</a>
+                                <a href="http://iotapps.belajardisini.com/analytic/heartratereadings" class="btn btn-primary btn-sm btn-round"><i class="primary"></i> Statistic</a>
+
+                                                                <a href="http://iotapps.belajardisini.com/analytic/heartratereadings/train" class="btn btn-default btn-sm btn-round "><i class="default"></i> Train</a>
+                                <a href="http://iotapps.belajardisini.com/analytic/heartratereadings/predict" class="btn btn-info btn-sm btn-round "><i class="info"></i> Predict</a>
+                                <a href="http://iotapps.belajardisini.com/analytic/heartratereadings/classifier" class="btn btn-warning btn-sm btn-round "><i class="warning"></i> Classifier</a>
+                                                            </td>
+                        </tr>
+                                                </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+    <script>
+
+function validate(){
+    swal({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+    if (result.value) {
+        $("#delete").submit();
+    }
+    })
+}
+
+</script>
+    <!-- End Custom JS -->
+
+
+{% endblock %}

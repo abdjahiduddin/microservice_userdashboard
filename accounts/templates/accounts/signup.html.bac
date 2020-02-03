@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br />
+<br />
+<div class="services-block content content-center" id="services">
+  <div class="container">
+  {% if error %}
+  {{ error }}
+  {% endif %}
+    <h1>SIGN UP!</h1>
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      Username:
+      <br />
+      <input type="text"required="required" name="username" minlength="4" maxlength="30"/>
+      <br />
+      E-mail:
+      <br />
+      <input type="email" required="required" name="emailaddress">
+      <br />
+      Password:
+      <br />
+      <input type="password" required="required" name="password1" maxlength="24"/>
+      <br />
+      Confirm Password:
+      <br />
+      <input type="password" required="required" name="password2" maxlength="24"/>
+      <br />
+      Age:
+      <br />
+      <input type="number" required="required" name="age" />
+      <br />
+      <br />
+      Your device's MAC Address:
+      <br />
+      <input type="text" required="required" name="devicemac" maxlength="17" minlength="17" />
+      <br />
+      <br />
+      Gender:
+      <br />
+			<select name="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			</select>
+      <br />
+      Body height (cm):
+      <br />
+      <input type="number" required="required" name="body_height" placeholder="1.0" step="0.01" min="20" />
+      <br />
+      Body weight (kg):
+      <br />
+      <input type="number" required="required" name="body_weight" placeholder="1.0" step="0.01" min="0" />
+      <br />
+      <br />
+      <input class ="btn btn-primary" type="submit" value="Click to Sign Up!" />
+      <br />
+    </form>
+  </div>
+</div>
+{% endblock %}

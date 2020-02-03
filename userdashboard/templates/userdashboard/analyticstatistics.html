@@ -1,0 +1,120 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Statistics of heartRateReadings</div>
+
+                
+                <div class="card-body">
+                    <div id="chart-stats" style="height: 370px; width: 100%;"></div>
+                <br>
+                Total Data : 9425
+                <br>
+                Devices : 3
+                <br>
+                Size : 0.526 MB
+                                <br>
+                <br>
+                    <div class="row">
+                                                <div class="col-sm-12 col-md-6 col-lg-4" id="chart-umur" style="height: 200px; width: 100%;"></div>
+                                                <div class="col-sm-12 col-md-6 col-lg-4" id="chart-status" style="height: 200px; width: 100%;"></div>
+                                                <div class="col-sm-12 col-md-6 col-lg-4" id="chart-detak_jantung" style="height: 200px; width: 100%;"></div>
+                                            </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+    <script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chart-stats", {
+    animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Data Statistics"
+	},
+	axisY: {
+		title: "Number of Data"
+	},
+	data: [{
+		type: "column",
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontColor: "white",
+		dataPoints: [{"label":"27\/5\/2019","y":294},{"label":"15\/6\/2019","y":3},{"label":"16\/6\/2019","y":3},{"label":"17\/6\/2019","y":22}]	}]
+});
+chart.render();
+
+/** Dynamic Statistics */
+var chart = new CanvasJS.Chart("chart-umur", {
+    animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Statistics Of Umur"
+	},
+	axisY: {
+		title: "Unit"
+	},
+	data: [{
+		type: "line",
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontColor: "white",
+		dataPoints: [{"label":"10:46:37","y":23},{"label":"10:46:37","y":23},{"label":"10:46:37","y":23},{"label":"10:46:38","y":23},{"label":"10:46:38","y":23},{"label":"10:46:38","y":23},{"label":"10:46:39","y":23},{"label":"11:01:31","y":23},{"label":"11:01:32","y":23},{"label":"11:01:32","y":23}]	}]
+});
+chart.render();
+var chart = new CanvasJS.Chart("chart-status", {
+    animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Statistics Of Status"
+	},
+	axisY: {
+		title: "Unit"
+	},
+	data: [{
+		type: "line",
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontColor: "white",
+		dataPoints: [{"label":"10:46:37","y":1},{"label":"10:46:37","y":1},{"label":"10:46:37","y":1},{"label":"10:46:38","y":1},{"label":"10:46:38","y":1},{"label":"10:46:38","y":1},{"label":"10:46:39","y":1},{"label":"11:01:31","y":1},{"label":"11:01:32","y":1},{"label":"11:01:32","y":1}]	}]
+});
+chart.render();
+var chart = new CanvasJS.Chart("chart-detak_jantung", {
+    animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Statistics Of Detak_jantung"
+	},
+	axisY: {
+		title: "Unit"
+	},
+	data: [{
+		type: "line",
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontColor: "white",
+		dataPoints: [{"label":"10:46:37","y":81},{"label":"10:46:37","y":80.1},{"label":"10:46:37","y":80.4},{"label":"10:46:38","y":81},{"label":"10:46:38","y":80.1},{"label":"10:46:38","y":80.4},{"label":"10:46:39","y":80.4},{"label":"11:01:31","y":80.1},{"label":"11:01:32","y":80.4},{"label":"11:01:32","y":81}]	}]
+});
+chart.render();
+/** End of Dynamic Statistics */
+
+}
+
+var timeout = setTimeout("location.reload(true);",30000);
+</script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- End Custom JS -->
+
+
+{% endblock %}

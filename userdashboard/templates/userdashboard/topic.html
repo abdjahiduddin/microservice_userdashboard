@@ -1,0 +1,80 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+
+
+                <div class="card-header">List of {{ request.user.username }}'s Topics</div>
+                    </br>
+                    <a href="{% url 'topiccreate' %}" class="btn btn-success btn-sm btn-round" data-toggle="tooltip" ><i class="success"></i> Register A Topic </a>
+                    
+                  {% for topic in topics %}
+                  <div class="card-body table-responsive">
+                        {% if error %}
+                        <div class="alert alert-danger">
+                        <p>{{ error }}</p>
+                        </div>
+                        {% endif %}
+                        <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <!--<th>Structure</th>-->
+                            <th>Options</th>
+                            <!-- <th>Status</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ topic.name }}</td>
+                          <td>{{ topic.description }}</td>
+                          <!--<td>{{ topic.structure }}</td>-->
+                          <!-- <td>{{ topic.status }}</td> -->
+                          <td>
+                              <a href="{% url 'topicdetail' topic.name %}" class="btn btn-info btn-sm btn-round"><i class="info"></i> Detail</a>
+                              <a href="{% url 'topicupdate' topic.name %}" class="btn btn-success btn-sm btn-round"><i class="success"></i> Update</a>
+                              <button type="button" class="btn btn-danger btn-sm btn-round" onclick="validate('delete_topic_{{topic.name}}')"><i class="danger"></i> Remove</button>
+                              <form method="POST" action="{% url 'topicdelete' topic.name %}" id="delete_topic_{{topic.name}}">
+                              {% csrf_token %}
+                              <input type="hidden" />
+                              </form>
+                          </td>
+                          </tr>
+                        </tbody>
+                        </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+<!-- START CUSTOM SCRIPT -->
+
+    <script>
+
+function validate(id){
+    var r = confirm("Are you sure? You won't be able to revert this!")
+    if (r == true){
+        document.getElementById(id).submit()
+    }    
+}
+
+$(document).ready(function(){
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+});
+
+</script>
+
+    <!-- End Custom JS -->
+{% load staticfiles %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+
+<head>
+    <title>Trend Application</title>
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/compiled.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/datatable.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/additional.min.css' %}">
+    <script src="{% static 'analytic/hr/jquery.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/bootstrap.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/datatable.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/additional.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">Heart Rate Analytic Application</h1>
+        </div>
+        <div class="col-md-12 above-hr">
+            <div class="col-md-11">
+                <label>Logged in as {{ request.user.username }} </label>
+            </div>
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Menu</button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/userdashboard"> Home </a>
+                        </li>
+                        <li>
+                            <a href="/dataanalytics"> Analytic Dashboard </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li>
+                            <a href="{% url 'accountseditprofile' %}">Profile</a>
+                        </li>
+                        <li>
+                            <a class="text-danger"
+                                href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                            <form id="logout" method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- trend form -->
+        <div class="col-md-12 above-hr">
+            <form id="form" action="process" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="radio">Trend Type:</label>
+                    <div id="radio">
+                        <div class="radio-inline">
+                            <label><input type="radio" name="type" value="track" id="type" onclick="change_status(true)"
+                                    checked required>Track</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="type" value="daily" id="type"
+                                    onclick="change_status(false)">Daily</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="type" value="monthly" id="type"
+                                    onclick="change_status(false)">Monthly</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="type" value="yearly" id="type"
+                                    onclick="change_status(false)">Yearly</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input class="form-control" style="height: 50px;" type="date" id="date" name="date"
+                        min={{ created }} max={{ now }} required disabled>
+                </div>
+                <input type="hidden" name="topic" id="topic" value="{{topic}}">
+                <button class="btn btn-default" type="submit">Show Trend</button>
+            </form>
+        </div>
+        <!-- if already submit trend form -->
+        {% if "OK" in status %}
+        {% include "main/heart_rate/user_information.html" %}
+        {% include "main/heart_rate/trend_information.html" %}
+        {% endif %}
+    </div>
+</body>
+
+</html>
+{% endblock %}

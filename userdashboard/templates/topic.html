@@ -1,0 +1,45 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">List of Your Topics</div>
+                                <div class="card-body table-responsive">
+                                            <div class="alert alert-danger">
+                                <strong>Danger!</strong> your package limit, 1 Topic has been reached. Please upgrade your package !
+                        </div>
+                                        <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                                                <tr>
+                            <td>1</td>
+                            <td>heartRateReadings</td>
+                            <td>Readings for heart rate</td>
+                            <td>
+                                <a href="http://iotapps.belajardisini.com/topic/heartratereadings" class="btn btn-info btn-sm btn-round"><i class="info"></i> Detail</a>
+                                <a href="http://iotapps.belajardisini.com/topic/heartratereadings/edit" class="btn btn-success btn-sm btn-round"><i class="success"></i> Update</a>
+                                <form method="POST" action="http://iotapps.belajardisini.com/topic/heartratereadings" accept-charset="UTF-8" style="display: inline-block" id="delete_5c987ec8adb0644b900acb82"><input name="_method" type="hidden" value="DELETE"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                                <button type="button" class="btn btn-danger btn-sm btn-round" onclick="validate(&quot;5c987ec8adb0644b900acb82&quot;)"><i class="danger"></i> Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                                                </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+{% load staticfiles %}
+{% endblock %}

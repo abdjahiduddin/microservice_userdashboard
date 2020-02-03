@@ -1,0 +1,72 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Update Device</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{url 'deviceupdate'
+                    {device.name} }"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="name" value="IoT middleware" readonly autofocus>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+
+                            <div class="col-md-6">
+                                <input id="description" type="text" class="form-control" name="description" value="Middleware to handle health data from smartwatch" required>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">Status</label>
+
+                            <div class="col-md-6">
+                              <select class="form-control" name="status" >
+                                <option value="active" selected>Active</option>
+                                <option value="retired" >Retired</option>
+                              </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="location" class="col-md-4 col-form-label text-md-right">Location</label>
+                            <div class="col-md-6">
+                                <input id="location" type="text" class="form-control" name="location" value="Elswheyre"  required>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+        <!-- End Custom JS -->
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <title>Trend Application</title>
+    <link rel="stylesheet" href="{% static 'hr/styles/compiled.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hr/styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hr/styles/datatable.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hr/styles/additional.min.css' %}">
+    <script src="{% static 'hr/jquery.min.js' %}"></script>
+    <script src="{% static 'hr/bootstrap.min.js' %}"></script>
+    <script src="{% static 'hr/datatable.min.js' %}"></script>
+    <script src="{% static 'hr/additional.min.js' %}"></script>
+</head>
+
+<body>
+    {% block alert %}{% endblock %}
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">Heart Rate Analytic Application</h1>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

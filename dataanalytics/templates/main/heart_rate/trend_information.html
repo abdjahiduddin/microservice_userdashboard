@@ -1,0 +1,21 @@
+{% for activity, detail in trend.detail.items %}
+    <hr>
+    <div class="page-header">
+        <h4 class="text-center">{{activity|upper}} Trend</h4>
+    </div>
+    <!-- if data could be found in trend -->
+    {% if "No data" not in detail %}
+            {% if activity == "resting" %}
+                {% include "main/heart_rate/trend_information_resting.html" %}
+            {% endif %}
+            
+            {% if activity == "exercising" %}
+                {% include "main/heart_rate/trend_information_exercising.html" %}
+            {% endif %}
+    {% else %}
+    <!-- no data alert -->
+        <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> {{detail}}
+        </div>
+    {% endif %}
+{% endfor %}

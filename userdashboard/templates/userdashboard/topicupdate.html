@@ -1,0 +1,63 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+<main class="py-4">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Topic Update</div>
+                <div class="card-body table-responsive">
+                <form action="{% url 'topicupdate' topic.name %}" method="POST">
+                {% csrf_token %}
+                {% if error %}
+                <div class="alert alert-danger">
+                <p>{{ error }}</p>
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                        <div class="form-group row">
+                            <label for="{{ field.label }}" class="col-md-4
+                            col-form-label text-md-right">{{ field.html_name }}</label>
+                            <div class="col-md-6">
+                              {{ field }}
+                              {{ field.errors }}
+                              {{ field.help_text }}
+                            </div>
+                        </div>
+                {% endfor %}
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="{{ device }}" class="col-md-4
+                    col-form-label text-md-right">Device list</label>
+                    <div class="col-md-6">
+                    {% for device in connected_devices %}
+                      <input type="checkbox" name="devicelist" value={{ device }} checked>{{ device }}</input>
+                    {% endfor %}
+                    {% for device in unconnected_devices %}
+                      <input type="checkbox" name="devicelist" value={{ device }}>{{ device }}</input>
+                    {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                </ br>
+                </ br>
+                <div class="col-md-6 offset-md-4">
+                  <button type="submit" class="btn btn-primary">
+                  Update
+                </div>
+                </button>
+                </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+    <!-- Start Custom JS -->
+    <!-- End Custom JS -->
+
+{% endblock %}

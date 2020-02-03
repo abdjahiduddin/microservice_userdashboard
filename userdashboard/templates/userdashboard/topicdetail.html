@@ -1,0 +1,62 @@
+  {% extends 'userdashboard.html' %}
+  {% block content %}
+  {% load staticfiles %}
+
+  <main class="py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header">Topic Information</div>
+                  <div class="card-body">
+                  {% for key, value in topics.items %}
+                    <div class="form-group row">
+                        <label for="{{ key }}" class="col-md-4 col-form-label text-md-right">{{ key }}</label>
+                        <div class="col-md-6">
+                            <input id="name" type="text" class="form-control" name="{{ key }}" value="{{ value }}" readonly>
+                        </div>
+                    </div>
+                  {% endfor %}
+
+                    <div class="form-group row">
+                        <div class="col-md-12" style="text-align:center;">
+                        <a href="{% url 'topicexplorer' topics.name %}" class="btn btn-info btn-sm btn-round"><i class="info"></i> View Data</a>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <h4 style="text-align:center;">Connected Devices</h4>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                      <table class="table">
+                      {% for dict in connecteddevices %}
+                      <thead>
+                      <tr>
+                       {% for key in dict.keys %}
+                        <th>{{ key }}</th>
+                       {% endfor %}
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                       {% for val in dict.values %}
+                          <td>{{ val }}</td>
+                       {% endfor %}
+                      </tr>
+                      </tbody>
+                      {% endfor %}
+                      </table>
+                      </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+        </main>
+    </div>
+
+{% endblock %}

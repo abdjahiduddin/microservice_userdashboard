@@ -1,0 +1,109 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}        
+    <main class="py-4">
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+            <div class="card">
+            <div class="card-header">Data of {{topic_name}} topic</div>
+            <div class="card-body table-responsive">
+                <table class="table" id="data">
+                    <thead>
+                      <tr>
+                          <th>#</th>
+                        {% for outer_key in outer_keys %}                            
+                            {% if outer_key == 'id' %}
+                              
+                            {% elif outer_key == 'time' %}
+                              {% for payload_key in payload_keys %}
+                              <th>{{ payload_key }}</th>
+                              {% endfor %}
+                              <th>{{ outer_key }}</th>
+                            {% else %}
+                              <th>{{ outer_key }}</th>
+                            {% endif %}
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>                      
+                      {% for dic in topic_data %}
+                      <tr>
+                        {% with counter=forloop.counter%}
+                        <th>{{ counter }}</th>                        
+                        {% for data in dic %}                        
+                            {% if data == 'id' %}
+                            <form method="POST" action="{% url 'topicquery' topic_name dic.id %}" id="query_form_{{dic.id}}">
+                            {% csrf_token %}
+                            <input type="hidden" />
+                            </form>                                    
+                            {% elif data == 'payload' %}
+                                {{ dic|get_item:data |safe}}
+                            {% else %}
+                                <th>{{ dic|get_item:data }}</th>
+                            {% endif %}                                                        
+                        {% endfor %}
+                        <th id="query_button_{{ counter }}"></th>    
+                        <script type="text/javascript"> 
+                          document.getElementById("query_button_{{ counter }}").innerHTML = "<th><button type=\"button\" class=\"btn btn-info btn-sm btn-round\" onclick=\"javascript:{document.getElementById('query_form_{{dic.id}}').submit()}\"> See detail</button><th></th>";
+                        </script>                                  
+                        {% endwith %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <!-- Start Custom JS -->
+<script>
+$('#data').DataTable({
+    serverSide: true,
+    processing: true,
+    ajax: {
+        url: '#',
+        type: 'POST'
+    },
+    columns: [
+                    {
+            data: 'umur',
+            name: 'umur'
+        },
+                    {
+            data: 'status',
+            name: 'status'
+        },
+                    {
+            data: 'nama',
+            name: 'nama'
+        },
+                    {
+            data: 'detak_jantung',
+            name: 'detak_jantung'
+        },
+        
+                    {
+            data: 'device',
+            name: 'device'
+        },
+                    {
+            data: 'created_at',
+            name: 'created_at'
+        },
+        {
+            data: 'id',
+            render: function (data, type, row) {
+                return '<a href="viewer/' + data +
+                    '" class="btn btn-info btn-sm btn-round"><i class="info"></i> Detail</a>';
+            }
+        }
+    ],
+
+});
+
+</script>
+<!-- End Custom JS -->
+{% endblock %}	

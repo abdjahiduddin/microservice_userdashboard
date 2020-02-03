@@ -1,0 +1,16 @@
+{% autoescape off %}
+
+Hi {{ user.username }},
+
+Please click on the link to validate your registration, and then wait for 24 hours until your validation has been verified by PTRIoT-EX's Admin.
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+After 24 hours, you can login to PTRIoT-EX.
+If after 24 hours you are still unable to login, please reply this e-mail so that your account will be verified in haste by our Admin.
+
+
+Cheers,
+
+The PTRIoT-EX team
+{% endautoescape %}

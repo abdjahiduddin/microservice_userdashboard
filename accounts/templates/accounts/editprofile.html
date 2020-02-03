@@ -1,0 +1,54 @@
+{% extends 'userdashboard.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<main class="py-4">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Edit Your Profile</div>
+                <div class="card-body table-responsive">
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if error %}
+                <div class="alert alert-danger">
+                <p>{{ error }}</p>
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                  {% if field.label == 'Password' %}
+                  <div class="form-group row">
+                    <label for="{{ field.label }}" class="col-md-4 col-form-label text-md-right">{{ field.html_name }}</label>
+                    <div class="col-md-6">                      
+                      {{ field.errors }}
+                      {{ field.help_text |safe}}
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="form-group row">
+                        <label for="{{ field.label }}" class="col-md-4 col-form-label text-md-right">{{ field.html_name }}</label>
+                        <div class="col-md-6">
+                          {{ field }}
+                          {{ field.errors }}
+                          {{ field.help_text }}
+                        </div>
+                      </div>
+                  {% endif %}
+                {% endfor %}
+                <!-- 
+                <table>
+                {{ form.as_table }}
+                </table>                
+                <input type="submit">Submit</button>
+                -->
+                <div class="col-md-6 offset-md-4">
+                  <button type="submit" class="btn btn-primary">
+                    Update
+                </div>
+                </form>
+                </ br>
+                </div>
+            </div>
+{% endblock %}

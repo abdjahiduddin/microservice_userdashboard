@@ -1,0 +1,258 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Classifier heartRateReadings</div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                        <div class="col-md-6">
+                            <input id="name" type="text" class="form-control"
+                                name="name" value="heartRateReadings" readonly autofocus>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Classifier</label>
+                        <div class="col-md-2">
+                            <button class="btn btn-info btn-sm btn-round" data-toggle="modal" data-target="#modalInput"><i
+                                    class="info"></i>Based Input</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success btn-sm btn-round" data-toggle="modal" data-target="#modalDay"><i
+                                    class="success"></i>Based Day</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-danger btn-sm btn-round" data-toggle="modal" data-target="#modalNum"><i
+                                    class="danger"></i>Based Number</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Input -->
+<div class="modal fade" id="modalInput" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Classification based Input</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="http://iotapps.belajardisini.com/analytic/heartratereadings/classifier" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <input type="hidden" name="_token" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <Input name="method" type="hidden" value="input">
+                                <div class="form-group row">
+                    <label for="analytic.umur" class="col-md-4 col-form-label text-md-right">Umur</label>
+
+                    <div class="col-md-6">
+                        <input id="analytic.umur" type="number" class="form-control"
+                            name="data[umur]" placeholder="0" value="" required autofocus>
+
+                                            </div>
+                </div>
+                                <div class="form-group row">
+                    <label for="analytic.status" class="col-md-4 col-form-label text-md-right">Status</label>
+
+                    <div class="col-md-6">
+                        <input id="analytic.status" type="number" class="form-control"
+                            name="data[status]" placeholder="0" value="" required autofocus>
+
+                                            </div>
+                </div>
+                                <div class="form-group row">
+                    <label for="analytic.nama" class="col-md-4 col-form-label text-md-right">Nama</label>
+
+                    <div class="col-md-6">
+                        <input id="analytic.nama" type="number" class="form-control"
+                            name="data[nama]" placeholder="0" value="" required autofocus>
+
+                                            </div>
+                </div>
+                                <div class="form-group row">
+                    <label for="analytic.detak_jantung" class="col-md-4 col-form-label text-md-right">Detak_jantung</label>
+
+                    <div class="col-md-6">
+                        <input id="analytic.detak_jantung" type="number" class="form-control"
+                            name="data[detak_jantung]" placeholder="0" value="" required autofocus>
+
+                                            </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="machine" class="col-md-4 col-form-label text-md-right">Machine</label>
+
+                    <div class="col-md-6">
+                    <select class="form-control" name="machine" >
+                        <option value="php-ml">PHP-Machine Learning</option>
+                        <option value="spark" disabled>Apache Spark</option>
+                    </select>
+
+                                            </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Input-->
+
+<!-- Modal Time -->
+<div class="modal fade" id="modalDay" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Classification based Day</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="http://iotapps.belajardisini.com/analytic/heartratereadings/classifier" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <input type="hidden" name="_token" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <Input name="method" type="hidden" value="day">
+                <div class="form-group row">
+                    <label for="day" class="col-md-4 col-form-label text-md-right">Day</label>
+
+                    <div class="col-md-6">
+                        <input id="day" type="date" class="form-control"
+                            name="day" placeholder="2018-10-20" min="2018-01-01" max="2018-12-31" required>
+
+                                            </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="machine" class="col-md-4 col-form-label text-md-right">Machine</label>
+
+                    <div class="col-md-6">
+                    <select class="form-control" name="machine" >
+                        <option value="php-ml">PHP-Machine Learning</option>
+                        <option value="spark" disabled>Apache Spark</option>
+                    </select>
+
+                                            </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Input-->
+
+<!-- Modal Time -->
+<div class="modal fade" id="modalNum" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Classification based Last N-Number</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="http://iotapps.belajardisini.com/analytic/heartratereadings/classifier" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <input type="hidden" name="_token" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                <Input name="method" type="hidden" value="number">
+                <div class="form-group row">
+                    <label for="number" class="col-md-4 col-form-label text-md-right">Number</label>
+
+                    <div class="col-md-6">
+                        <input id="number" type="number" class="form-control"
+                            name="number" placeholder="10" min="1" max="9425" required>
+
+                                            </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="machine" class="col-md-4 col-form-label text-md-right">Machine</label>
+
+                    <div class="col-md-6">
+                    <select class="form-control" name="machine" >
+                        <option value="php-ml">PHP-Machine Learning</option>
+                        <option value="spark">Apache Spark</option>
+                    </select>
+
+                                            </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Input-->
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+    <script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("day").setAttribute("max", today);
+</script>
+    <!-- End Custom JS -->
+
+        <script>
+    swal({
+        type: 'error',
+        title: 'Oops...',
+        html: 'There are no trained data'
+    });
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+	   <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Update Topic</div>
+
+                <div class="card-body">
+                    <form method="POST" action="http://iotapps.belajardisini.com/topic/heartratereadings" accept-charset="UTF-8"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                        <input type="hidden" name="_token" value="iT0Z7sKfBokuMLOhlw2cidgm6wLA8QwvtMs61vAP">
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="name" value="heartRateReadings" readonly autofocus>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+
+                            <div class="col-md-6">
+                                <input id="description" type="text" class="form-control" name="description" value="Readings for heart rate" required >
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="structure" class="col-md-4 col-form-label text-md-right">Structure</label>
+
+                            <div class="col-md-6">
+                            <select class="form-control" name="structure" >
+                                <option value="semi-structured" selected>Semi-structured</option>
+                            </select>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">Status</label>
+
+                            <div class="col-md-6">
+                            <select class="form-control" name="status" >
+                                                                    <option value="active">Active</option>
+                                    <option value="archive">Archive</option>
+                                                            </select>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Devices</label>
+
+                            <div class="col-md-6">
+
+                            <select class="js-multiple-devices form-control" name="devices[]" multiple="multiple" >
+                                                                <option value="5c98702cadb0643ae41bbf92" Selected>IoT middleware</option>
+                                                                <option value="5cad88f4adb06412eb11327e" Selected>Jam dari kantor</option>
+                                                            </select>
+
+                                                            </div>
+                        </div>
+
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+    <script>
+    $(document).ready(function() {
+        $('.js-multiple-devices').select2();
+    });
+</script>
+    <!-- End Custom JS -->
+
+{% endblock %}

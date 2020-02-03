@@ -1,0 +1,71 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+{% load staticfiles %}
+
+<main class="py-4">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">User Profile</div>
+                {% if message %}
+                <div class="card-header">{{ message }}</div>
+                {% endif %}
+                <form method="POST" action="{% url 'editprofile' request.user.username %}" />
+                {% csrf_token %}
+                <div class="card-body">
+                {% for key, value in userprofile.items %}
+                {% if key == '_id' %}
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                {% elif key == 'gender' %}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ key }}</label>
+                            <div class="col-md-6">
+                              <select name="gender">
+                                <option value="male" {% if value == 'male' %} {{'selected'|safe}} {% endif %}>Male</option> 
+                                <option value="female" {% if value == 'female' %} {{'selected'|safe}} {% endif %}>Female</option>
+                              </select>
+                            </div>
+                        </div>
+                {% elif key == 'username' or key == 'email' or key == 'userjwt' %}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ key }}</label>
+                            <div class="col-md-6">
+                                <input id="{{ key }}" readonly class="form-control" name="{{ key }}" value="{{ value }}">
+                            </div>
+                        </div>
+                {% elif key != 'username' or key != 'email' %}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ key }}</label>
+                            <div class="col-md-6">
+                                <input id="{{ key }}" type="number" class="form-control" name="{{ key }}" value="{{ value }}" step="0.01" min="20">
+                            </div>
+                        </div>
+                {% elif key == 'age' %}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ key }}</label>
+                            <div class="col-md-6">
+                                <input id="{{ key }}" type="number"
+                                class="form-control" name="{{ key }}" value="{{ value }}">
+                            </div>
+                        </div>
+                 {% endif %}
+                 {% endfor %}
+                 <div class = "col-md-21 text-center">
+                  <input class ="btn btn-primary" type="submit" value="Click to Edit!" />
+                  </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+  </div>
+</main>
+  <!--    </div>  -->
+    <!-- Start Custom JS -->
+        <!-- End Custom JS -->
+
+{% endblock %}

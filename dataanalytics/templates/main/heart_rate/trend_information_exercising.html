@@ -1,0 +1,174 @@
+<div class="col-md-12">
+    <!-- if not track trend, display it's trend graph -->
+    {% if trend.type != "track" %}
+    <div class="col-md-7">
+        <label for="trend_presentation">Presentation</label>
+        <div id="chartExercising"></div>
+    </div>
+    {% endif %}
+    <div class={{trend.html_format.div.outer}}>
+        <div class={{trend.html_format.div.inner1}}>
+            <label for="trend_illustration">Illustration</label>
+            {% with line=trend.html_format.illustration.exercising.line  info=trend.html_format.illustration.exercising.info%}
+            <pre id="trend_illustration" class="text-center">| ------- | ------- |<br> {{ line }} <br> {{ info }}</pre>
+            {% endwith %}
+        </div>
+        <div class={{ trend.html_format.div.inner2 }}>
+            <label for="trend_detail">Detail</label>
+            <p id="trend_detail">
+                {% with low=user.divider_range.exercising.low high=user.divider_range.exercising.high %}
+                Average trends for your heart rate is {{ detail.average }} beats/minute.
+                Normal heart rate for {{ activity }} activity in age {{ user.profile.age }} year(s)
+                should between {{ low }} beats/minute and {{ high }} beats/minute.
+                {% endwith %}
+                <br>
+                As conclusion, your heart rate is <b>
+                    <font color={{ detail.color }}>{{ detail.condition }}</font>
+                </b>,
+                because your heart rate is <font color={{ detail.color }}>{{ detail.reason }}</font> normal heart rate
+                range.
+                <br>
+                <!-- if not healthy, present summary link -->
+                {% if detail.status != "normal" %}
+                <a target="_blank" href="article_summary/{{ detail.status }}">This</a>
+                {% endif %}
+                {{ detail.solution }}
+            </p>
+        </div>
+    </div>
+</div>
+{% if trend.type != "track" %}
+{% with lowe=user.divider_range.exercising.low highe=user.divider_range.exercising.high visual=trend.detail.exercising.visualitazion %}
+<script>
+        var low = {{ lowe }};
+        low = Number(low);
+        var high = {{ highe }};
+        high = Number(high);
+    
+        var judul = "Trend of heart rate by ";
+        var date = "{{ trend.time_range }}"
+        judul = judul + date
+        var type_num = {{ visual.type }};
+        var type = "";
+        if (type_num == 0) {
+            type = "Month";
+        }else if (type_num == 1) {
+            type = "Day";
+        } else {
+            type = "Hour";
+        }
+        var xaxis_value = {{ visual.xaxis|safe}};
+        xaxis_value.unshift('-');
+        xaxis_value.push('-')
+        var yaxis_value = {{ visual.yaxis|safe }};
+        yaxis_value.unshift(null);
+        yaxis_value.push(null);
+    
+        var optionsE = {
+            annotations: {
+                yaxis: [
+                    {
+                        y: low,
+                        borderColor: "#FF4560",
+                        label: {
+                            borderColor: "#FF4560",
+                            position: 'left',
+                            offsetX: 15,
+                            offsetY: 5,
+                            style: {
+                                color: "#fff",
+                                background: "#FF4560"
+                            },
+                            text: "Low"
+                        }
+                    },
+                    {
+                        y: high,
+                        borderColor: "#FF4560",
+                        label: {
+                            borderColor: "#FF4560",
+                            position: 'left',
+                            offsetX: 15,
+                            offsetY: 5,
+                            style: {
+                                color: "#fff",
+                                background: "#FF4560"
+                            },
+                            text: "High"
+                        }
+                    }
+                ]
+            },
+            chart: {
+                height: 350,
+                type: 'line',
+                shadow: {
+                    enabled: true,
+                    color: '#000',
+                    top: 18,
+                    left: 7,
+                    blur: 10,
+                    opacity: 1
+                },
+                toolbar: {
+                    show: false
+                }
+            },
+            colors: ['#FFFFFF', '#FFFFFF', '#77B6EA'],
+            stroke: {
+                curve: 'straight'
+            },
+            series: [{
+                name: "Low",
+                data: [low, null]
+            },
+            {
+                name: "High",
+                data: [high, null]
+            },
+            {
+                name: "Heart rate",
+                data: yaxis_value
+            }
+            ],
+            title: {
+                text: judul,
+                align: 'center'
+            },
+            grid: {
+                borderColor: '#e7e7e7',
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            markers: {
+                size: 6
+            },
+            xaxis: {
+                categories: xaxis_value,
+                offsetY: 0,
+                title: {
+                    text: type
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Average heart rate (beats/minutes)'
+                },
+            },
+            legend: {
+                show: false
+            }
+        }
+    
+        var chartE = new ApexCharts(
+            document.querySelector("#chartExercising"),
+            optionsE
+        );
+    
+        chartE.render();
+    
+</script>
+{% endwith %}
+{% endif %}

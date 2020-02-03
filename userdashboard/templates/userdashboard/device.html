@@ -1,0 +1,92 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+
+        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">List of {{ request.user.username }}'s Devices</div>
+                    </br>
+                    <a href="{% url 'devicecreate' %}" class="btn btn-success btn-sm btn-round" data-toggle="tooltip" title="You can create 1 more devices!"><i class="success"></i> Register A Device</a>
+                    {% for device in devicemacs %}
+                    <div class="card-body table-responsive">
+                        {% if error %}
+                        <div class="alert alert-danger">
+                        <p>{{ error }}</p>
+                        </div>
+                        {% endif %}
+                        <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Mac Address</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ device.name }}</td>
+                            <td>{{ device.macaddress}}</td>
+                            <td>{{ device.description }}</td>
+                            <td>{{ device.location }}</td>
+                            <td>
+                                <a href="{% url 'devicedetail' device.name %}" class="btn btn-info btn-sm btn-round"><i class="info"></i> Detail</a>
+                                <a href="{% url 'deviceupdate' device.name %}" class="btn btn-success btn-sm btn-round"><i class="success"></i> Update</a>
+
+                                <button type="button" class="btn btn-danger btn-sm btn-round" onclick="validate('delete_device_{{device.name}}')"><i class="danger"></i> Remove</button>
+                                <form method="POST" action="{% url 'devicedelete' device.name %}" id="delete_device_{{device.name}}">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                                </form>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+</div>
+        </main>
+    </div>
+    <!-- Start Custom JS -->
+    <script>
+
+    function validate(id){
+    var r = confirm("Are you sure? You won't be able to revert this!")
+    if (r == true){
+        document.getElementById(id).submit()
+    }    
+
+        /*
+    swal({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+    if (result.value) {
+        document.getElementById(id).submit()
+    }
+    })
+    */
+}
+
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+    <!-- End Custom JS -->
+
+{% endblock %}

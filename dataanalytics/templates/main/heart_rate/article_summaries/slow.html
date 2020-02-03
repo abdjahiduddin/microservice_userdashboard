@@ -1,0 +1,54 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<head>
+    <title>Trend Application</title>
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/compiled.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/datatable.min.css' %}">
+    <link rel="stylesheet" href="{% static 'analytic/hr/styles/additional.min.css' %}">
+    <script src="{% static 'analytic/hr/jquery.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/bootstrap.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/datatable.min.js' %}"></script>
+    <script src="{% static 'analytic/hr/additional.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">Heart Rate Analytic Application</h1>
+        </div>
+        <div class="col-md-12 above-hr">
+            <div class="col-md-11">
+                
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+        <hr>
+        <h3>Summary of slow heart rate (bradycardia) article</h3>
+        <p>
+            This term (bradycardia) is a medical term of slow heart rate.
+            Based on data analysis, your heart rate is conditioned as slow heart rate.
+            In bradycardia condition, you can be <font color='green'>healthy</font> or <font color='red'>not healthy</font>.
+            Why? There's a lot of factor, but we must exclude some factors, because this analysis is based on heart rate condition.
+        </p>
+        <h4>- not healthy bradycardia</h4>
+        <p>
+            People can be <font color='red'>not healthy</font>, because it affect their body.
+            There's some symptoms that can make people <font color='red'>not healthy</font>, such as <u>shortness of breath and feeling dizzy and fatigue</u>.
+            You need ask specialist and take some treatment to take care about this.
+        </p>
+        <h4>- healthy bradycardia</h4>
+        <p>
+            Sometimes, people can <font color='green'>healthy</font> in this condition.
+            Mostly it's an athlete.
+            Their heart rate can reach 40 - 60 bpm, which is lower than usual people.
+            It's normal for athletes, because they've trained for some activity.
+        </p>
+        <hr>
+        <h4>Reference:</h4>
+        Please read <a target='_blank' href="https://myheart.net/articles/low-heart-rate-bradycardia-explained-by-a-heart-doctor/">this</a> actual article for better understanding.
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'userdashboard.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="services-block content content-center" id="services">
+  <div class="container">
+    <h2>EDIT YOUR PROFILE</h2>
+    <form method="post" >
+        {% csrf_token %}
+        {% for field in form %}
+        <p>
+          {{ field.label_tag }}<br>
+          {{ field }}
+        </p>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+    </ br>
+</div>
+{% endblock %}
